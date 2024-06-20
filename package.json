@@ -1,0 +1,57 @@
+{
+  "name": "erp-be-hrm",
+  "version": "1.0.0",
+  "description": "backend for erp-hrm",
+  "main": "app.ts",
+  "scripts": {
+    "start": "ts-node ./web-main/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r dotenv/config ./web-main/app.ts",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "seed:undo": "npx sequelize-cli db:seed:undo",
+    "migrate:undo:all": "npx sequelize-cli db:migrate:undo:all",
+    "seed:undo:all": "npx sequelize-cli db:seed:undo:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITS-ERP/ERP-BE-HRM.git"
+  },
+  "keywords": [
+    "erp",
+    "hrm",
+    "human resource management"
+  ],
+  "author": "kurniacf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ITS-ERP/ERP-BE-HRM/issues"
+  },
+  "homepage": "https://github.com/ITS-ERP/ERP-BE-HRM#readme",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "decimal.js": "^10.4.3",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "i18next": "^23.7.16",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mysql2": "^3.7.0",
+    "nodemon": "^3.0.3",
+    "passport": "^0.7.0",
+    "passport-auth0": "^1.4.4",
+    "sequelize": "^6.35.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.11.7",
+    "axios": "^1.7.2",
+    "sequelize-cli": "^6.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

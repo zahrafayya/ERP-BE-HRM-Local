@@ -1,0 +1,4 @@
+{
+  "ConnectionError": "Error while checking server connection",
+  "InternalServerErrorMessage": "We have encountered an error, please try again!"
+}

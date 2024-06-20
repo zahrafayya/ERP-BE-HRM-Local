@@ -1,0 +1,58 @@
+"use strict";
+
+const { DataTypes } = require("sequelize");
+const { initBaseAttributes } = require("../interfaces/baseMigration");
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.createTable("position", {
+      pkid: {
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.BIGINT,
+        autoIncrement: true,
+      },
+      department_id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: "department",
+          key: "pkid",
+        },
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+      },
+      type: {
+        type: DataTypes.ENUM("Blue", "White"),
+        allowNull: false,
+      },
+      white_payroll_id: {
+        type: DataTypes.BIGINT,
+        references: {
+          model: "white_payroll",
+          key: "pkid",
+        },
+      },
+      white_is_pemotong_bukpot: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      blue_cost_ph: {
+        type: DataTypes.FLOAT,
+      },
+      tunjangan_tetap: {
+        type: DataTypes.BIGINT,
+      },
+      ...initBaseAttributes(),
+    });
+  },
+
+  async down(queryInterface) {
+    await queryInterface.dropTable("position");
+  },
+};
