@@ -21,6 +21,7 @@ export abstract class BaseController {
         const privilegeResult: PrivilegeCheckerResultDTO = await PrivilegeChecker.getPrivilege(req, token, req.method, this.moduleName, router);
 
         if (!privilegeResult.is_granted) {
+            console.log(privilegeResult);
             throw new Error(MessagesKey.ERRORINVALIDTOKEN);
         }
 

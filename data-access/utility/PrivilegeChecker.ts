@@ -16,9 +16,6 @@ export class PrivilegeChecker {
         .then(response => {
             const resp = response.data.data as PrivilegeCheckerResultDTO;
             return resp;
-        })
-        .catch(error => {
-            throw new Error(MessagesKey.ERRORINVALIDTOKEN);
         });
     }
 }
