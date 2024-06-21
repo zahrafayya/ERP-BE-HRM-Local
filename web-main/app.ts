@@ -24,6 +24,8 @@ import bukpotRouter from './routers/bukpot.router';
 import presenceBlueRouter from './routers/presence_blue.router';
 import bukpotBlueRouter from './routers/bukpot_blue.router';
 
+const dns = require('dns');
+
 dotenv.config();
 
 // Create an instance of express and CORS
@@ -42,6 +44,16 @@ db.sequelize
   .catch((err: object) => console.log("Error syncing tables: ", err));
 
 // Define routes
+app.get('/test-dns', (req, res) => {
+  dns.lookup('scm-api.erplabiim.com', (err: any, address: any, family: any) => {
+      if (err) {
+          res.status(500).send(`DNS lookup failed: ${err.message}`);
+      } else {
+          res.send(`Address: ${address}, Family: IPv${family}`);
+      }
+  });
+});
+
 app.use('/api/recruitment_request', recruitmentRequestRouter);
 app.use('/api/department', departmentRouter);
 app.use('/api/asuransi', asuransiRouter);
