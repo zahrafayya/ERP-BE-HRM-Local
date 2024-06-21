@@ -43,9 +43,12 @@ db.sequelize
   .then(() => console.log("Database connected"))
   .catch((err: object) => console.log("Error syncing tables: ", err));
 
+const dnsPromises = dns.promises;
+dnsPromises.setServers(['8.8.8.8', '8.8.4.4']); 
+
 // Define routes
 app.get('/test-dns', (req, res) => {
-  dns.lookup('scm-api.erplabiim.com', (err: any, address: any, family: any) => {
+  dnsPromises.lookup('scm-api.erplabiim.com', (err: any, address: any, family: any) => {
       if (err) {
           res.status(500).send(`DNS lookup failed: ${err.message}`);
       } else {
@@ -55,7 +58,7 @@ app.get('/test-dns', (req, res) => {
 });
 
 app.get('/test-dns-erp', (req, res) => {
-  dns.lookup('erp-api.erplabiim.com', (err: any, address: any, family: any) => {
+  dnsPromises.lookup('erp-api.erplabiim.com', (err: any, address: any, family: any) => {
       if (err) {
           res.status(500).send(`DNS lookup failed: ${err.message}`);
       } else {
