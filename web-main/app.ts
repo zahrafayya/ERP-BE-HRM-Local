@@ -46,25 +46,25 @@ db.sequelize
 const dnsPromises = dns.promises;
 dnsPromises.setServers(['8.8.8.8', '8.8.4.4']); 
 
-// Define routes
-app.get('/test-dns', (req, res) => {
-  dnsPromises.lookup('scm-api.erplabiim.com', (err: any, address: any, family: any) => {
-      if (err) {
-          res.status(500).send(`DNS lookup failed: ${err.message}`);
-      } else {
-          res.send(`Address: ${address}, Family: IPv${family}`);
-      }
-  });
-});
+async function testDnsResolution() {
+  try {
+      const addresses = await dnsPromises.lookup('scm-api.erplabiim.com');
+      console.log('Addresses:', addresses);
+      return addresses;
+  } catch (err) {
+      console.error('DNS lookup failed:', err);
+      throw err;
+  }
+}
 
-app.get('/test-dns-erp', (req, res) => {
-  dnsPromises.lookup('erp-api.erplabiim.com', (err: any, address: any, family: any) => {
-      if (err) {
-          res.status(500).send(`DNS lookup failed: ${err.message}`);
-      } else {
-          res.send(`Address: ${address}, Family: IPv${family}`);
-      }
-  });
+// Define routes
+app.get('/test-dns', async (req, res) => {
+  try {
+      const addresses = await testDnsResolution();
+      res.send(`Address: ${addresses.address}, Family: IPv${addresses.family}`);
+  } catch (error) {
+      res.status(500).send(`DNS lookup failed: ${error}`);
+  }
 });
 
 app.use('/api/recruitment_request', recruitmentRequestRouter);
