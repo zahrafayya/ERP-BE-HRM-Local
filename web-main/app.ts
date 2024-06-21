@@ -54,6 +54,16 @@ app.get('/test-dns', (req, res) => {
   });
 });
 
+app.get('/test-dns-erp', (req, res) => {
+  dns.lookup('erp-api.erplabiim.com', (err: any, address: any, family: any) => {
+      if (err) {
+          res.status(500).send(`DNS lookup failed: ${err.message}`);
+      } else {
+          res.send(`Address: ${address}, Family: IPv${family}`);
+      }
+  });
+});
+
 app.use('/api/recruitment_request', recruitmentRequestRouter);
 app.use('/api/department', departmentRouter);
 app.use('/api/asuransi', asuransiRouter);
