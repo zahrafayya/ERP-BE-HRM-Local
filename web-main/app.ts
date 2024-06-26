@@ -48,7 +48,7 @@ dnsPromises.setServers(['8.8.8.8', '8.8.4.4']);
 
 async function testDnsResolution() {
   try {
-      const addresses = await dnsPromises.lookup('scm-api.erplabiim.com');
+      const addresses = await dnsPromises.lookup('usermanagement-local-production.up.railway.app');
       console.log('Addresses:', addresses);
       return addresses;
   } catch (err) {
